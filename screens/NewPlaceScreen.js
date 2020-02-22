@@ -14,10 +14,12 @@ const NewPlaceScreen = props => {
     props.navigation.navigate('Places');
   }
   return (
-    <ScrollView style={styles.screen}>
-      <Text style={styles.title}>Title</Text>
-      <TextInput style={styles.textInput} onChangeText={textChangeHandler} value={title} />      
-      <Button title="Save Place" onPress={() => { }} color={Colors.primary} onPress={savePlaceHandler}/>      
+    <ScrollView>
+      <View style={styles.form}>
+        <Text style={styles.label}>Title</Text>
+        <TextInput style={styles.textInput} onChangeText={textChangeHandler} value={title} />      
+        <Button title="Save Place" onPress={() => { }} color={Colors.primary} onPress={savePlaceHandler}/>      
+      </View>
     </ScrollView>
   )
 }
@@ -34,11 +36,10 @@ NewPlaceScreen.navigationOptions =  navData => {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
+  form: {    
     margin: 30,
   }, 
-  title:{
+  label:{
     fontFamily: 'OpenSans',
     fontSize: 18,
     marginBottom: 15,
@@ -47,7 +48,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     borderBottomWidth: 1, 
     marginBottom: 15,
-    fontSize: 18
+    paddingVertical: 4,
+    paddingHorizontal: 2,
+    fontSize: 18,
   }, 
 })
 
