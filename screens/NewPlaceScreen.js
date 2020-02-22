@@ -1,4 +1,6 @@
 import React,{ useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as placesActions from '../store/places-actions';
 import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
@@ -6,11 +8,13 @@ import Colors from '../constants/Colors';
 
 const NewPlaceScreen = props => {
   const [title, setTitle] = useState(title);
+  const dispatch = useDispatch();
+
   const textChangeHandler = (changedText) => {
     setTitle(changedText);
   }
   const savePlaceHandler = () => {
-    console.log("the title is " + title);
+    dispatch(placesActions.addPlace(title));
     props.navigation.navigate('Places');
   }
   return (
