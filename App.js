@@ -8,7 +8,7 @@ import * as Font from 'expo-font';
 import placesReducers from './store/places-reducers';
 
 //TODO - this is for development only remove this when deploying to prod
-import { composeWithDevTools } from 'redux-devtools-extension';
+//import { composeWithDevTools } from 'redux-devtools-extension';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -22,9 +22,9 @@ const rootReducer = combineReducers({
 })
 
 //TODO --this is for development debugging only. remove "composeWithDevTools" argument to the creatStore function when deploying to prod.
-const store = createStore(rootReducer, compose(applyMiddleware(ReduxThunk), composeWithDevTools()));
+//const store = createStore(rootReducer, compose(applyMiddleware(ReduxThunk), composeWithDevTools()));
 
-//const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
