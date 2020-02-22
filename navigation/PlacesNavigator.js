@@ -7,10 +7,11 @@ import NewPlaceScreen from '../screens/NewPlaceScreen'
 import MapScreen from '../screens/MapScreen'
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
+
 const MainNavigator = createStackNavigator({
   Places: PlacesListScreen,
-  Details: PlaceDetailScreen,
-  Edit: NewPlaceScreen,
+  PlaceDetails: PlaceDetailScreen,
+  NewPlace: NewPlaceScreen,
   Map: MapScreen
 },{
   defaultNavigationOptions: {

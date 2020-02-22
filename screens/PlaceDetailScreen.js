@@ -17,7 +17,7 @@ PlaceDetailScreen.navigationOptions =  navData => {
     headerTitle: 'Place details',
     headerRight: () => (      
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-add' : 'ios-add'} onPress={()=>{navData.navigation.navigate('Edit')}} />
+          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-star' : 'ios-star'} onPress={()=>{}} />
         </HeaderButtons>      
     )
   };

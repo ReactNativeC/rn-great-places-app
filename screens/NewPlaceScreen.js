@@ -18,7 +18,7 @@ NewPlaceScreen.navigationOptions =  navData => {
     headerTitle: 'Add a great place',
     headerRight: () => (      
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-add' : 'ios-add'} onPress={()=>{navData.navigation.navigate('Edit')}} />
+          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-save' : 'ios-save'} onPress={()=>{navData.navigation.navigate('Places')}} />
         </HeaderButtons>      
     )
   };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import GreatPlacesNavigator from './navigation/GreatPlacesNavigator';
+import PlacesNavigator from './navigation/PlacesNavigator';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 
@@ -18,6 +18,6 @@ export default function App() {
     return (<AppLoading startAsync={fetchFonts} onFinish={() => { setFontLoaded(true) }} />);
 
   return (    
-      <GreatPlacesNavigator />   
+      <PlacesNavigator />   
   );
 }

@@ -7,7 +7,7 @@ const PlacesListScreen = props => {
   return (
     <View style={styles.screen}>
       <Text style={styles.titleText}>Great Places List Screen</Text>
-      <Button title="Go to Details" onPress={()=> props.navigation.navigate("Details")}></Button>
+      <Button title="Go to Details" onPress={()=> props.navigation.navigate("PlaceDetails")}></Button>
     </View>
   )
 }
@@ -17,7 +17,7 @@ PlacesListScreen.navigationOptions =  navData => {
     headerTitle: 'Great Places',
     headerRight: () => (      
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-add' : 'ios-add'} onPress={()=>{navData.navigation.navigate('Edit')}} />
+          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-add' : 'ios-add'} onPress={()=>{navData.navigation.navigate('NewPlace')}} />
         </HeaderButtons>      
     )
   };
