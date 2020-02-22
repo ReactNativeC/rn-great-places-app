@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
+import Colors from '../constants/Colors';
 
 const NewPlaceScreen = props => {
   return (
-    <View style={styles.screen}>
-      <Text style={styles.titleText}>Edit/Add  Screen</Text>
-      <Button title="Locate" onPress={() => { }} />
-      <Button title="Find in Map" onPress={() => { props.navigation.navigate('Map')}} />
-    </View>
+    <ScrollView style={styles.screen}>
+      <Text style={styles.title}>Title</Text>
+      <TextInput style={styles.textInput} />      
+      <Button title="Save Place" onPress={() => { }} color={Colors.primary} style={styles.button} />      
+    </ScrollView>
   )
 }
 
@@ -26,13 +27,21 @@ NewPlaceScreen.navigationOptions =  navData => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1, 
-    justifyContent: 'center',
-    alignItems: 'center'
+    flex: 1,
+    margin: 30,
   }, 
-  titleText: {
-    fontSize: 20,
-    fontFamily: 'OpenSans-Bold'
+  title:{
+    fontFamily: 'OpenSans',
+    fontSize: 18,
+    marginBottom: 15,
+  }, 
+  textInput:{
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1, 
+    marginBottom: 15,
+  }, 
+  button:{
+    
   }
 })
 

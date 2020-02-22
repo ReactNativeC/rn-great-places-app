@@ -16,7 +16,7 @@ const MainNavigator = createStackNavigator({
 },{
   defaultNavigationOptions: {
     headerStyle: {      
-      backgroundColor: Platform.OS == 'android'? Colors.primary : 'white',      
+      backgroundColor: Platform.OS == 'android'? Colors.primary : '',      
     },
     headerTitleStyle :{
       fontSize: 22,
