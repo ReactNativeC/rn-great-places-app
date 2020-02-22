@@ -1,16 +1,16 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import PlacesScreen from '../screens/PlacesScreen'
-import PlaceDetailsScreen from '../screens/PlaceDetailsScreen'
-import EditPlaceScreen from '../screens/EditPlaceScreen'
+import PlacesListScreen from '../screens/PlacesListScreen'
+import PlaceDetailScreen from '../screens/PlaceDetailScreen'
+import NewPlaceScreen from '../screens/NewPlaceScreen'
 import MapScreen from '../screens/MapScreen'
 import Colors from '../constants/Colors';
 import { Platform } from 'react-native';
 const MainNavigator = createStackNavigator({
-  Places: PlacesScreen,
-  Details: PlaceDetailsScreen,
-  Edit: EditPlaceScreen,
+  Places: PlacesListScreen,
+  Details: PlaceDetailScreen,
+  Edit: NewPlaceScreen,
   Map: MapScreen
 },{
   defaultNavigationOptions: {

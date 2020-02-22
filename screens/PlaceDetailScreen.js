@@ -3,19 +3,18 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 
-const EditPlaceScreen = props => {
+const PlaceDetailScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text style={styles.titleText}>Edit/Add  Screen</Text>
-      <Button title="Locate" onPress={() => { }} />
-      <Button title="Find in Map" onPress={() => { props.navigation.navigate('Map')}} />
+      <Text style={styles.titleText}>Deatils Screen</Text>     
+      <Button title="Map" onPress={() => { props.navigation.navigate('Map')}} />
     </View>
   )
 }
 
-EditPlaceScreen.navigationOptions =  navData => {
+PlaceDetailScreen.navigationOptions =  navData => {
   return {
-    headerTitle: 'Add a great place',
+    headerTitle: 'Place details',
     headerRight: () => (      
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
           <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-add' : 'ios-add'} onPress={()=>{navData.navigation.navigate('Edit')}} />
@@ -36,4 +35,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default EditPlaceScreen;
+export default PlaceDetailScreen;

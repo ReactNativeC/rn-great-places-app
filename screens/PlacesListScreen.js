@@ -1,20 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Platform } from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 
-const PlaceDetailsScreen = props => {
+const PlacesListScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text style={styles.titleText}>Deatils Screen</Text>     
-      <Button title="Map" onPress={() => { props.navigation.navigate('Map')}} />
+      <Text style={styles.titleText}>Great Places List Screen</Text>
+      <Button title="Go to Details" onPress={()=> props.navigation.navigate("Details")}></Button>
     </View>
   )
 }
 
-PlaceDetailsScreen.navigationOptions =  navData => {
+PlacesListScreen.navigationOptions =  navData => {
   return {
-    headerTitle: 'Place details',
+    headerTitle: 'Great Places',
     headerRight: () => (      
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
           <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-add' : 'ios-add'} onPress={()=>{navData.navigation.navigate('Edit')}} />
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default PlaceDetailsScreen;
+export default PlacesListScreen;
