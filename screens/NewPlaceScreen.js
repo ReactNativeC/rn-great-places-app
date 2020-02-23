@@ -2,8 +2,6 @@ import React,{ useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/places-actions';
 import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
-import { HeaderButtons, Item} from 'react-navigation-header-buttons';
-import HeaderButton from '../components/UI/HeaderButton';
 import Colors from '../constants/Colors';
 
 const NewPlaceScreen = props => {
@@ -31,11 +29,6 @@ const NewPlaceScreen = props => {
 NewPlaceScreen.navigationOptions =  navData => {
   return {
     headerTitle: 'Add a great place',
-    // headerRight: () => (      
-    //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
-    //       <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-save' : 'ios-save'} onPress={()=>{navData.navigation.navigate('Places')}} />
-    //     </HeaderButtons>      
-    // )
   };
 }
 
