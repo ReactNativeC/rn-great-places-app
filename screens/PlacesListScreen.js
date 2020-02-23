@@ -12,7 +12,10 @@ const PlacesListScreen = props => {
       <FlatList 
       data={places}
       renderItem={itemData => <PlaceItem title={itemData.item.title} address="18 Maida Rd, Edison, NJ" image="" onSelect={ () => {
-        props.navigation.navigate("PlaceDetails")
+        props.navigation.navigate("PlaceDetails",{
+          placeTitle: itemData.item.title, 
+          placeId: itemData.item.id
+        })
       }} />}
       keyExtractor={item => item.id}
       />

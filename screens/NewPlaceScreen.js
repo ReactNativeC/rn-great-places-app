@@ -31,11 +31,11 @@ const NewPlaceScreen = props => {
 NewPlaceScreen.navigationOptions =  navData => {
   return {
     headerTitle: 'Add a great place',
-    headerRight: () => (      
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-save' : 'ios-save'} onPress={()=>{navData.navigation.navigate('Places')}} />
-        </HeaderButtons>      
-    )
+    // headerRight: () => (      
+    //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //       <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-save' : 'ios-save'} onPress={()=>{navData.navigation.navigate('Places')}} />
+    //     </HeaderButtons>      
+    // )
   };
 }
 

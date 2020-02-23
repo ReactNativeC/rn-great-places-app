@@ -14,7 +14,7 @@ const PlaceDetailScreen = props => {
 
 PlaceDetailScreen.navigationOptions =  navData => {
   return {
-    headerTitle: 'Place details',
+    headerTitle: navData.navigation.getParam('placeTitle'),    
     headerRight: () => (      
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
           <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-star' : 'ios-star'} onPress={()=>{}} />
