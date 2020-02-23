@@ -1,36 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, StyleSheet, Image, Platform, FlatList, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
-import { HeaderButtons, Item, HiddenItem} from 'react-navigation-header-buttons';
+import { View, StyleSheet, Platform, FlatList } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
-import Card from '../components/UI/Card';
+import PlaceItem from '../components/PlaceItem'; 
 
 const PlacesListScreen = props => {
   const places = useSelector(state => state.places.places);
-  let TouchableComponent = TouchableOpacity;
-  
-  if(Platform.OS == 'android' && Platform.Version >= 21)
-    TouchableComponent = TouchableNativeFeedback;
-
-  const renderPlaceItem = itemData => {
-    return (
-      <TouchableComponent onPress={()=>{props.navigation.navigate("PlaceDetails")}} useForeground>
-        <Card style={styles.listItemContainer}>               
-            <View style={styles.imageContainer}>
-              <Image style={styles.image} source={{uri:'https://images.squarespace-cdn.com/content/v1/55075d61e4b0bc414e7950e0/1508615497811-2I20O014FU7GAVYG95Q2/ke17ZwdGBToddI8pDm48kCpX2mwG9slVUzQCwhOMrQF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UVDXM9yQ8sG6x3COIEUaadqpk9XPubC0H4MH9Az_c7nPqIjSxZ2rgD2_Fw9U6DWfsg/92-Edison-WoodlandRd.jpg?format=2500w'}} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.textContent}>{itemData.item.title}</Text>
-            </View>                     
-        </Card>
-      </TouchableComponent> 
-    )
-  }
   return (
     <View style={styles.screen}>
       <FlatList 
       data={places}
-      renderItem={renderPlaceItem}
+      renderItem={itemData => <PlaceItem title={itemData.item.title} address="18 Maida Rd, Edison, NJ" image="" onSelect={ () => {
+        props.navigation.navigate("PlaceDetails")
+      }} />}
       keyExtractor={item => item.id}
       />
     </View>
@@ -53,32 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
   },
-  listItemContainer:{    
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    margin:10,
-    padding: 8,   
-  },
-  imageContainer: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    width: 70, 
-    height:70,
-    borderRadius: 35,
-    overflow: 'hidden'
-  }, 
-  image: {
-    height: '100%',
-    width: '100%'
-  },
-  textContainer: {
-    paddingLeft: 10,
-  }, 
-  textContent: {
-    fontSize: 18,
-    fontFamily: 'OpenSans'
-  }
+  
 })
 
 export default PlacesListScreen;
