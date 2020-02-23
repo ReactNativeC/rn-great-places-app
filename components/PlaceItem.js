@@ -11,7 +11,7 @@ const PlaceItem = props => {
   return (
     <TouchableComponent onPress={props.onSelect} useForeground>
       <Card style={styles.listItemContainer}>                         
-          <Image style={styles.image} source={{uri: props.image}} />       
+          <Image style={styles.image} source={{uri: props.imageUri}} />       
           <View style={styles.infoContainer}>
             <Text style={styles.title}>{props.title}</Text>
             <Text style={styles.address}>{props.address}</Text>

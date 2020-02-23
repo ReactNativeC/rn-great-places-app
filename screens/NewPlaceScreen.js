@@ -7,13 +7,17 @@ import ImagePicker from '../components/ImagePicker';
 
 const NewPlaceScreen = props => {
   const [title, setTitle] = useState(title);
+  const [selectedImageUri, setSelectedImageUri] = useState()
   const dispatch = useDispatch();
 
   const textChangeHandler = (changedText) => {
     setTitle(changedText);
   }
-  const savePlaceHandler = () => {
-    dispatch(placesActions.addPlace(title));
+  const imagePickerHandler = imagePath => {
+    setSelectedImageUri(imagePath);
+  }
+  const savePlaceHandler = () => {    
+    dispatch(placesActions.addPlace(title, selectedImageUri));
     props.navigation.navigate('Places');
   }
 
@@ -22,8 +26,8 @@ const NewPlaceScreen = props => {
       <View style={styles.form}>
         <Text style={styles.label}>Title</Text>
         <TextInput style={styles.textInput} onChangeText={textChangeHandler} value={title} />      
-        <ImagePicker />
-        <Button title="Save Place" onPress={() => { }} color={Colors.primary} onPress={savePlaceHandler}/>      
+        <ImagePicker onImageTaken={imagePickerHandler} />
+        <Button title="Save Place"  color={Colors.primary} onPress={savePlaceHandler}/>      
       </View>
     </ScrollView>
   )

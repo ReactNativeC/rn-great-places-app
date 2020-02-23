@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Linking } from 'expo';
 
 const ImgPicker = props => {
-  const [image, setImage] = useState();
+  const [pickedImage, setPickedImage] = useState();
   const takePhoto = async () => {
     var permission = await ImagePicker.requestCameraPermissionsAsync();
     if(!permission.granted) {
@@ -22,20 +22,23 @@ const ImgPicker = props => {
       return;
     }
       
-    const result = await ImagePicker.launchCameraAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       //aspect: [16, 9],
       quality: 0.5
     });
-    setImage(result.uri);
-    console.log(result);
+    setPickedImage(result.uri);
+    props.onImageTaken(result.uri);
   }
   return (
-    <View>
+    <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        <Text></Text>
-        <Image style={styles.image} source={{uri:image}} />
+        { !pickedImage ? 
+          (<Text>No Photo taken yet!</Text>)
+          :
+          (<Image style={styles.image} source={{uri:pickedImage}} />)
+        }
       </View>
       <View style={styles.buttonContainer}>
         <Button title="Take Photo" color={Colors.primary} onPress={takePhoto} />
@@ -45,18 +48,25 @@ const ImgPicker = props => {
 }
 
 const styles = StyleSheet.create({
+  imagePicker: {
+    alignItems:"center", 
+    marginBottom: 15,
+  },
   imagePreview:{
     width: '100%',
     height: 300,
     borderColor:'#ccc',
     borderWidth: 1,
+    justifyContent:'center',
+    alignItems: 'center',
+    marginBottom: 10,
   },
   image:{
     width:'100%',
     height:'100%'
   },
   buttonContainer:{
-    marginVertical: 20
+    width:'100%'
   }
 })
 
