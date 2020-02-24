@@ -3,34 +3,39 @@ import { Text, Image, View, StyleSheet, Button, Alert } from 'react-native';
 import Colors from '../constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import { Linking } from 'expo';
+import * as Permissions from 'expo-permissions';
 
 const ImgPicker = props => {
   const [pickedImage, setPickedImage] = useState();
-  const takePhoto = async () => {
-    var permission = await ImagePicker.requestCameraPermissionsAsync();
-    if(!permission.granted) {
-      Alert.alert('Permission', 'Sorry, we need camera permission to make this work!', [
-        {
-          text: 'Settings', 
-          onPress: () => { Linking.openURL('app-settings:') }
-        },
-        {
-          text: 'Cancel',       
-          style: 'cancel'
-        }
+
+  const verifyPermission = async () => {
+    const permissionResponse = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
+    if (!permissionResponse.granted) {
+      Alert.alert(
+        'Insufficient permissions!',
+        'You need to grant camera permissions to use this app.', [
+        { text: 'Settings', onPress: () => { Linking.openURL('app-settings:') } },
+        { text: 'Cancel', style: 'cancel' }
       ]);
+      return false;
+    }
+    return true;
+  }
+
+  const takeImageHandler = async () => {
+    const hasPermission = await verifyPermission();
+    if(!hasPermission){
       return;
     }
-      
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      //aspect: [16, 9],
+      aspect: [16, 9],
       quality: 0.5
     });
     setPickedImage(result.uri);
     props.onImageTaken(result.uri);
   }
+
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
@@ -41,7 +46,7 @@ const ImgPicker = props => {
         }
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Take Photo" color={Colors.primary} onPress={takePhoto} />
+        <Button title="Take Photo" color={Colors.primary} onPress={takeImageHandler} />
       </View>
     </View>
   )

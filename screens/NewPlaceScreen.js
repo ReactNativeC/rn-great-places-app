@@ -16,9 +16,9 @@ const NewPlaceScreen = props => {
   const imagePickerHandler = imagePath => {
     setSelectedImageUri(imagePath);
   }
-  const savePlaceHandler = () => {    
+  const savePlaceHandler = () => {     
     dispatch(placesActions.addPlace(title, selectedImageUri));
-    props.navigation.navigate('Places');
+    props.navigation.goBack();
   }
 
   return (
