@@ -6,7 +6,14 @@ import PlacesNavigator from './navigation/PlacesNavigator';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import placesReducers from './store/places-reducers';
+import { init } from './helpers/db';
 
+init().then(() => {
+  console.log("initialized database");
+}).catch(err => {
+  console.log('Initializing db failed.');  
+  console.log(err);
+})
 //TODO - this is for development only remove this when deploying to prod
 //import { composeWithDevTools } from 'redux-devtools-extension';
 
