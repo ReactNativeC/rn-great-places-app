@@ -1,13 +1,39 @@
 import React, { useState } from 'react';
 import { Text, View, ActivityIndicator, Button, Alert, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 const LocationPicker = () => {
+
+  const verifyPermission = async () => {
+    const permissionResponse = await Permissions.askAsync(Permissions.LOCATION);
+    if (!permissionResponse.granted) {
+      Alert.alert(
+        'Insufficient permissions!',
+        'You need to grant Location permissions to use this feature', [
+        { text: 'Settings', onPress: () => { Linking.openURL('app-settings:') } },
+        { text: 'Cancel', style: 'cancel' }
+      ]);
+      return false;
+    }
+    return true;
+  }
+
+  const getCurrentLocation = async () => {
+    const hasPermission = await verifyPermission(); 
+    if(!hasPermission) {
+      return;
+    }
+    const location = await Location.getCurrentPositionAsync({});
+    console.log(location)
+  }
+
   return (
     <View style={styles.locationPicker}>
       <View style={styles.mapPreview}>
         <Text>No Location is chosen yet!</Text>
       </View>
-      <Button title='Get Current Location' color={Colors.primary} />
+      <Button title='Get Current Location' color={Colors.primary} onPress={getCurrentLocation} />
     </View>
   )
 }
