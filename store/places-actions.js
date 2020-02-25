@@ -35,7 +35,7 @@ export const fetchPlaces = () => {
   return async dispatch => {
     try {
       const dbResult = await retrievePlaces();
-      console.log(dbResult);
+      //console.log(dbResult);
       dispatch({type: SET_PLACES, places:dbResult.rows._array});
     }catch(err){
       console.log(err);

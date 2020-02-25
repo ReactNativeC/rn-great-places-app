@@ -4,6 +4,7 @@ import * as placesActions from '../store/places-actions';
 import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
 import Colors from '../constants/Colors';
 import ImagePicker from '../components/ImagePicker';
+import LocationPicker from '../components/LocationPicker';
 
 const NewPlaceScreen = props => {
   const [title, setTitle] = useState(title);
@@ -27,6 +28,7 @@ const NewPlaceScreen = props => {
         <Text style={styles.label}>Title</Text>
         <TextInput style={styles.textInput} onChangeText={textChangeHandler} value={title} />      
         <ImagePicker onImageTaken={imagePickerHandler} />
+        <LocationPicker />
         <Button title="Save Place"  color={Colors.primary} onPress={savePlaceHandler}/>      
       </View>
     </ScrollView>
