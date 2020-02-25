@@ -3,8 +3,11 @@ import { Text, View, ActivityIndicator, Button, Alert, StyleSheet } from 'react-
 import Colors from '../constants/Colors';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
-const LocationPicker = () => {
+import MapPreview from '../components/MapPreview';
 
+const LocationPicker = props => {
+  [location, setLocation] = useState();
+  [isLoading, setIsLoading] = useState();
   const verifyPermission = async () => {
     const permissionResponse = await Permissions.askAsync(Permissions.LOCATION);
     if (!permissionResponse.granted) {
@@ -20,18 +23,30 @@ const LocationPicker = () => {
   }
 
   const getCurrentLocation = async () => {
-    const hasPermission = await verifyPermission(); 
-    if(!hasPermission) {
-      return;
+    setIsLoading(true);
+    try {
+      const hasPermission = await verifyPermission();
+      if (!hasPermission) {
+        return;
+      }
+      const userLocation = await Location.getCurrentPositionAsync({ timeout: 5000 });
+      setLocation({ lat: userLocation.coords.latitude, lng: userLocation.coords.longitude });
+    } catch (err) {
+      console.log(err);
+      throw err;
     }
-    const location = await Location.getCurrentPositionAsync({});
-    console.log(location)
+    setIsLoading(false);
   }
 
   return (
-    <View style={styles.locationPicker}>
+    <View style={styles.locationPicker}>      
       <View style={styles.mapPreview}>
-        <Text>No Location is chosen yet!</Text>
+        {isLoading? <ActivityIndicator size="large" color={Colors.primary} /> 
+        : (
+        <MapPreview location={location}>
+          <Text>No Location is chosen yet!</Text>
+        </MapPreview> 
+        )}       
       </View>
       <Button title='Get Current Location' color={Colors.primary} onPress={getCurrentLocation} />
     </View>
@@ -47,10 +62,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderWidth: 1, 
-    borderColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center'
-  
+    borderColor: '#ccc',       
+    justifyContent: 'center'     
   }
 })
 
