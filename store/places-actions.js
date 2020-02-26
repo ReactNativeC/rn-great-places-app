@@ -5,8 +5,8 @@ import { insertPlace } from '../helpers/db';
 import { retrievePlaces } from '../helpers/db';
 
 export const addPlace = (title, imageUri) => {  
-  return async dispatch => {
-    const fileName = imageUri.split('/').pop();  
+  return async dispatch => {    
+    const fileName = imageUri? imageUri.split('/').pop() : '';  
     const newImageUri = FileSystem.documentDirectory + fileName;
     try {      
       await FileSystem.moveAsync({
