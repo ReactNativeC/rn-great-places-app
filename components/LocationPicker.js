@@ -9,12 +9,12 @@ const LocationPicker = props => {
   [location, setLocation] = useState();
   [isLoading, setIsLoading] = useState();
   
-  useEffect(()=>{
-    let loc = props.navigation.getParam('selectedLocation');
+  let loc = props.navigation.getParam('selectedLocation');
+  useEffect(()=>{    
     if(loc) {
       setLocation(loc);
     }
-  },[location, props.navigation.getParam('selectedLocation')])
+  },[loc])
   
   const verifyPermission = async () => {
     const permissionResponse = await Permissions.askAsync(Permissions.LOCATION);
