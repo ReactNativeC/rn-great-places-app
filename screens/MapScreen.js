@@ -13,27 +13,39 @@ const MapScreen = () => {
   }
   const onLocationPicked = event => {
     setSelectedLocation({
-      latitude: event.nativeEvent.coordinate.latitude,
-      longitude: event.nativeEvent.coordinate.longitude
+      lat: event.nativeEvent.coordinate.latitude,
+      lng: event.nativeEvent.coordinate.longitude
     })    
   }
-
+  
   return (
     <View style={styles.container}>
       <MapView style={styles.mapStyle} region={mapRegion} onPress={onLocationPicked}>
-      { selectedLocation && <Marker title="You picked this location" coordinate={selectedLocation} /> }
+        {selectedLocation && 
+        <Marker title="You picked this location" coordinate={
+          { latitude: selectedLocation.lat, 
+            longitude: selectedLocation.lng 
+          }}
+        />
+        }
       </MapView>
     </View>
   )
 }
 
-MapScreen.navigationOptions =  navData => {
+const saveLocationHandler = navData => {
+  if (selectedLocation) {
+    navData.navigation.navigate('NewPlace', { 'selectedLocation': selectedLocation });
+  }
+};
+
+MapScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Map',
-    headerRight: () => (      
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item title="Add" iconSize={28} iconName={Platform.OS=='android'? 'md-save' : 'ios-save'} onPress={()=>{navData.navigation.navigate('PlaceDetails')}} />
-        </HeaderButtons>      
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item title="Save" iconSize={28} iconName={Platform.OS == 'android' ? 'md-save' : 'ios-save'} onPress={saveLocationHandler.bind(this, navData)} />       
+      </HeaderButtons>
     )
   };
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, ActivityIndicator, Button, Alert, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 import * as Location from 'expo-location';
@@ -8,6 +8,14 @@ import MapPreview from '../components/MapPreview';
 const LocationPicker = props => {
   [location, setLocation] = useState();
   [isLoading, setIsLoading] = useState();
+  
+  useEffect(()=>{
+    let loc = props.navigation.getParam('selectedLocation');
+    if(loc) {
+      setLocation(loc);
+    }
+  },[location, props.navigation.getParam('selectedLocation')])
+  
   const verifyPermission = async () => {
     const permissionResponse = await Permissions.askAsync(Permissions.LOCATION);
     if (!permissionResponse.granted) {
