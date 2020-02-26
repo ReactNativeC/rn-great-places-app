@@ -21,7 +21,9 @@ const PlacesListScreen = props => {
       renderItem={itemData => <PlaceItem title={itemData.item.title} address="18 Maida Rd, Edison, NJ" imageUri={itemData.item.imageUri} onSelect={ () => {
         props.navigation.navigate("PlaceDetails",{
           placeTitle: itemData.item.title, 
-          placeId: itemData.item.id
+          placeId: itemData.item.id, 
+          lat: itemData.item.lat,
+          lng: itemData.item.lng,
         })
       }} />}
       keyExtractor={item => item.id}

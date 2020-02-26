@@ -4,7 +4,7 @@ import * as FileSystem from 'expo-file-system';
 import { insertPlace } from '../helpers/db';
 import { retrievePlaces } from '../helpers/db';
 
-export const addPlace = (title, imageUri) => {  
+export const addPlace = (title, imageUri, selectedLocation) => {  
   return async dispatch => {    
     const fileName = imageUri? imageUri.split('/').pop() : '';  
     const newImageUri = FileSystem.documentDirectory + fileName;
@@ -13,7 +13,7 @@ export const addPlace = (title, imageUri) => {
         from: imageUri,
         to: newImageUri
       })
-      const dbResult = await insertPlace(title, newImageUri, 'Dummy address', 15.3, 18.5);
+      const dbResult = await insertPlace(title, newImageUri, 'Dummy address', selectedLocation.lat, selectedLocation.lng);
       console.log("dbResult.insertId: " + dbResult.insertId)
       console.log(dbResult);
       dispatch({
@@ -21,7 +21,9 @@ export const addPlace = (title, imageUri) => {
         placeData: {
           id: dbResult.insertId,
           title: title,
-          imageUri: newImageUri
+          imageUri: newImageUri, 
+          lat: selectedLocation.lat,
+          lng: selectedLocation.lng
         }
       });
     }catch(err) {

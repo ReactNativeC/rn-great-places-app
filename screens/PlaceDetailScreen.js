@@ -6,7 +6,10 @@ import HeaderButton from '../components/UI/HeaderButton';
 const PlaceDetailScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text style={styles.titleText}>Deatils Screen</Text>     
+      <Text style={styles.titleText}>Deatils Screen</Text>    
+      <Text>{props.navigation.getParam('lat')}</Text> 
+      <Text>{props.navigation.getParam('lng')}</Text> 
+      
       <Button title="Map" onPress={() => { props.navigation.navigate('Map')}} />
     </View>
   )
