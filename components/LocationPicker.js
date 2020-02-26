@@ -37,18 +37,24 @@ const LocationPicker = props => {
     }
     setIsLoading(false);
   }
+  const pickMapHandler = () => {
+    props.navigation.navigate('Map');
+  }
 
   return (
     <View style={styles.locationPicker}>      
       <View style={styles.mapPreview}>
         {isLoading? <ActivityIndicator size="large" color={Colors.primary} /> 
         : (
-        <MapPreview location={location}>
+        <MapPreview location={location} onPress={pickMapHandler}>
           <Text>No Location is chosen yet!</Text>
         </MapPreview> 
         )}       
       </View>
-      <Button title='Get Current Location' color={Colors.primary} onPress={getCurrentLocation} />
+      <View style={styles.buttonContianer}>
+        <Button title='Get Current Location' color={Colors.primary} onPress={getCurrentLocation} />
+        <Button title='Pick on Map' color={Colors.primary} onPress={pickMapHandler} />
+      </View>
     </View>
   )
 }
@@ -64,6 +70,10 @@ const styles = StyleSheet.create({
     borderWidth: 1, 
     borderColor: '#ccc',       
     justifyContent: 'center'     
+  },
+  buttonContianer:{
+    flexDirection: 'row', 
+    justifyContent: 'space-around'
   }
 })
 

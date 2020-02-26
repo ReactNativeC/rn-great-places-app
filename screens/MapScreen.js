@@ -1,12 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
-
+import MapView from 'react-native-maps'
 const MapScreen = () => {
+  const mapRegion = {
+    latitude: 40.744080, 
+    longitude: -73.936073, 
+    latitudeDelta: 0.0922, 
+    longitudeDelta: 0.0421
+  }
   return (
-    <View style={styles.screen}>
-      <Text style={styles.titleText}>Maps Screen</Text>
+    <View style={styles.container}>
+      <MapView style={styles.mapStyle} region={mapRegion} />
     </View>
   )
 }
@@ -23,7 +29,7 @@ MapScreen.navigationOptions =  navData => {
 }
 
 const styles = StyleSheet.create({
-  screen: {
+  container: {
     flex: 1, 
     justifyContent: 'center',
     alignItems: 'center'
@@ -31,6 +37,10 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 20,
     fontFamily: 'OpenSans-Bold'
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
   }
 })
 
