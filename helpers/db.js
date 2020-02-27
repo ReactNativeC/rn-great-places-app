@@ -39,7 +39,7 @@ export const insertPlace = (title, imageUri, address, lat, lng) => {
 export const retrievePlaces = () => {
   const promise = new Promise((resolve, reject) => {
     db.transaction(tx => {
-      tx.executeSql('select * from places', 
+      tx.executeSql('select * from places order by id desc', 
       [],
       (_, result) => {
         resolve(result);

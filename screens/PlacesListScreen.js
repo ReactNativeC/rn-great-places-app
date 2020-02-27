@@ -8,7 +8,7 @@ import * as placesActions from '../store/places-actions';
 
 const PlacesListScreen = props => {
   const dispatch = useDispatch();
-  const places = useSelector(state => state.places.places);
+  const places = useSelector(state => state.places.places.sort((a,b) => parseInt(a.id) > parseInt(b.id) ? -1 : 1));
 
   useEffect(()=>{
     dispatch(placesActions.fetchPlaces())
