@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, TouchableNativeFeedback, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TouchableNativeFeedback, StyleSheet, Platform } from 'react-native';
 import Card from '../components/UI/Card';
 
 const PlaceItem = props => {

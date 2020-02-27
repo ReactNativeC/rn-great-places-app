@@ -27,9 +27,23 @@ const ImgPicker = props => {
     if(!hasPermission){
       return;
     }
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      //aspect: [16, 9],
+      quality: 0.5
+    });
+    setPickedImage(result.uri);
+    props.onImageTaken(result.uri);
+  }
+
+  const pickImageHandler = async () => {
+    const hasPermission = await verifyPermission();
+    if(!hasPermission){
+      return;
+    }
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [16, 9],
+      //aspect: [16, 9],
       quality: 0.5
     });
     setPickedImage(result.uri);
@@ -47,6 +61,7 @@ const ImgPicker = props => {
       </View>
       <View style={styles.buttonContainer}>
         <Button title="Take Photo" color={Colors.primary} onPress={takeImageHandler} />
+        <Button title="Pick from Gallery" color={Colors.primary} onPress={pickImageHandler} />
       </View>
     </View>
   )
@@ -71,6 +86,8 @@ const styles = StyleSheet.create({
     height:'100%'
   },
   buttonContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     width:'100%'
   }
 })
