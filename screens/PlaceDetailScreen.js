@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, StyleSheet, Button, Dimensions, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, ScrollView} from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 import MapPreview from '../components/MapPreview';
@@ -14,11 +14,11 @@ const PlaceDetailScreen = props => {
   const mapPressHandler = () => {
     props.navigation.navigate('Map', {
       'readonly': true,
-      'selectedLocation' : {lat: place.lat, lng:place.lng}
+      'initialLocation' : {lat: place.lat, lng:place.lng}
     })
   }
   return (
-    <View style={styles.screen}>
+    <ScrollView contentContainerStyle={styles.screen}>
       <Image source={{uri:place.imageUri}} style={styles.image} />      
       <View style={styles.textContainer}>
         <Text style={styles.titleText}>{place.title}</Text>
@@ -29,7 +29,7 @@ const PlaceDetailScreen = props => {
           onPress={mapPressHandler}                   
         />  
       </View>           
-    </View>
+    </ScrollView>
   )
 }
 

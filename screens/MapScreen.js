@@ -4,7 +4,7 @@ import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 import MapView, { Marker } from 'react-native-maps'
 const MapScreen = props => {
-  [selectedLocation, setSelectedLocation] = useState(props.navigation.getParam('selectedLocation'));
+  [selectedLocation, setSelectedLocation] = useState(props.navigation.getParam('initialLocation'));
 
   const mapRegion = {
     latitude: selectedLocation? selectedLocation.lat : 40.744080, 
