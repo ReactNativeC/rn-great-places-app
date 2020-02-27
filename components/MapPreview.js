@@ -6,7 +6,7 @@ const MapPreview = props => {
   //using Google Maps Static API
   let imageUrl = '';
   if(props.location) {
-    imageUrl  = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.lat},${props.location.lng}&zoom=14&size=400x200&maptype=roadmap&&markers=color:green%7Clabel:G%7C${props.location.lat},${props.location.lng}&markers=color:red%7Clabel:A%7C${props.location.lat},${props.location.lng}&key=${config.google_maps_api_key}`;
+    imageUrl  = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.lat},${props.location.lng}&zoom=14&size=400x200&maptype=roadmap&&markers=color:green%7Clabel:A%7C${props.location.lat},${props.location.lng}&markers=color:red%7Clabel:A%7C${props.location.lat},${props.location.lng}&key=${config.google_maps_api_key}`;
   }  
   
   let TouchableComp = TouchableOpacity;

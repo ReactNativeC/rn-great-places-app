@@ -22,8 +22,6 @@ const PlacesListScreen = props => {
         props.navigation.navigate("PlaceDetails",{
           placeTitle: itemData.item.title, 
           placeId: itemData.item.id, 
-          lat: itemData.item.lat,
-          lng: itemData.item.lng,
         })
       }} />}
       keyExtractor={item => item.id}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Dimensions, Image } from 'react-native';
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
+import MapPreview from '../components/MapPreview';
 
 const PlaceDetailScreen = props => {
   const id = props.navigation.getParam('placeId');
@@ -11,12 +12,13 @@ const PlaceDetailScreen = props => {
   console.log(place);
   return (
     <View style={styles.screen}>
-      <Text style={styles.titleText}>Deatils Screen</Text>
+      <Image source={{uri:place.imageUri}} style={styles.image} />      
+      <Text style={styles.titleText}>{place.title}</Text>
       <Text>{place.address}</Text>
-      <Text>{props.navigation.getParam('lat')}</Text> 
-      <Text>{props.navigation.getParam('lng')}</Text> 
-
-      <Button title="Map" onPress={() => { props.navigation.navigate('Map')}} />
+      <Image source={{}} style={styles.map} />
+      <View style={styles.mapPreview}>
+        <MapPreview location={{lat:place.lat, lng:place.lng}} />  
+      </View>           
     </View>
   )
 }
@@ -34,14 +36,27 @@ PlaceDetailScreen.navigationOptions =  navData => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1, 
-    justifyContent: 'center',
+    flex: 1,   
     alignItems: 'center'
   }, 
   titleText: {
     fontSize: 20,
     fontFamily: 'OpenSans-Bold'
-  }
+  }, 
+  image: {
+    width: Dimensions.get('window').width, 
+    height: Dimensions.get('window').height / 2.2,
+    marginBottom: 15,
+  },
+  mapPreview: {
+    marginTop: 20, 
+    width: '100%',
+    height: Dimensions.get('window').height/3.2,
+    borderWidth: 1, 
+    borderColor: '#ccc',       
+    justifyContent: 'center'     
+  },
+
 })
 
 export default PlaceDetailScreen;
