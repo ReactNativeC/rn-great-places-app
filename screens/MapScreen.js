@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, Dimensions, NativeEventEmitter } from 'react-na
 import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/UI/HeaderButton';
 import MapView, { Marker } from 'react-native-maps'
-const MapScreen = () => {
-  [selectedLocation, setSelectedLocation] = useState();
+const MapScreen = props => {
+  [selectedLocation, setSelectedLocation] = useState(props.navigation.getParam('selectedLocation'));
+
   const mapRegion = {
-    latitude: 40.744080, 
-    longitude: -73.936073, 
-    latitudeDelta: 0.0922, 
-    longitudeDelta: 0.0421
+    latitude: selectedLocation? selectedLocation.lat : 40.744080, 
+    longitude: selectedLocation? selectedLocation.lng : -73.936073,
+    latitudeDelta: 0.0522, 
+    longitudeDelta: 0.0221
   }
   const onLocationPicked = event => {
     setSelectedLocation({
@@ -40,9 +41,11 @@ const saveLocationHandler = navData => {
 };
 
 MapScreen.navigationOptions = navData => {
+  readonly = navData.navigation.getParam('readonly')
   return {
     headerTitle: 'Map',
     headerRight: () => (
+      !readonly &&
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item title="Save" iconSize={28} iconName={Platform.OS == 'android' ? 'md-save' : 'ios-save'} onPress={saveLocationHandler.bind(this, navData)} />       
       </HeaderButtons>
