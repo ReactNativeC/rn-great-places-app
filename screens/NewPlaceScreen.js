@@ -1,13 +1,13 @@
 import React,{ useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/places-actions';
-import { View, Text, StyleSheet, Button, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, ScrollView, Alert } from 'react-native';
 import Colors from '../constants/Colors';
 import ImagePicker from '../components/ImagePicker';
 import LocationPicker from '../components/LocationPicker';
 
 const NewPlaceScreen = props => {
-  const [title, setTitle] = useState(title);
+  const [title, setTitle] = useState();
   const [selectedImageUri, setSelectedImageUri] = useState()
   const [selectedLocation, setSelectedLocation] = useState()
   const dispatch = useDispatch();
@@ -23,7 +23,19 @@ const NewPlaceScreen = props => {
   },[])
 
   const savePlaceHandler = () => {     
-    console.log(selectedLocation);
+    if(!title){
+      Alert.alert('Error','Please enter title',[{title:'OK'}])
+      return;
+    }
+    if(!selectedImageUri){
+      Alert.alert('Error','Please take a photo or pick an image',[{title:'OK'}])
+      return;
+    }
+    if(!selectedLocation){
+      Alert.alert('Error','Please Pick a location',[{title:'OK'}])
+      return;
+    }
+
     dispatch(placesActions.addPlace(title, selectedImageUri, selectedLocation));
     props.navigation.goBack();
   }
