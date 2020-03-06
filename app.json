@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "rn-great-places-app",
+    "description": "Great places app allows users to capture and track beautiful places",
     "slug": "rn-great-places-app",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -9,14 +10,16 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.0",    
+    "ios.buildNumber": "23",
+    "android.versionCode":"20",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/places-adaptive.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/places-adaptive.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+      "backgroundColor": "#000000"
+    },    
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -25,6 +28,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "primaryColor": "#000000"
   }
 }
