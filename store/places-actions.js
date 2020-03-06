@@ -24,7 +24,9 @@ export const addPlace = (title, imageUri, selectedLocation) => {
         console.log(resData);
       }
       
-      address = resData.results[0].formatted_address;      
+      if(resData && resData.results && resData.results.length > 0) {
+        address =  resData.results[0].formatted_address;      
+      }
     } catch(err) {
       console.log(err);
       throw err;
